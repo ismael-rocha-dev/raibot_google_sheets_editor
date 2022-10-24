@@ -1,0 +1,32 @@
+{
+  "name": "google_sheets_editor",
+  "version": "1.0.0",
+  "description": "api to save raitec members reunion hours on a google spreadsheet",
+  "main": "index.js",
+  "type": "module",
+  "module": "ES6",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon ./src/index.js"
+  },
+  "keywords": [
+    "google",
+    "sheets",
+    "spreadsheets",
+    "raitec"
+  ],
+  "author": "ismaellimarocha23@gmail.com",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.25.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "@google-cloud/local-auth": "^2.1.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "googleapis": "^105.0.0"
+  }
+}
