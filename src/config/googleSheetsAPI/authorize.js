@@ -16,11 +16,9 @@ export default async function authorize() {
     keyfilePath: CREDENTIALS_PATH,
   });
 
-
   if (client.credentials) {
     await saveCredentials(client);
   }
 
   return client;
 }
-

@@ -1,5 +1,5 @@
-import fs from 'fs/promises';
-import { CREDENTIALS_PATH, TOKEN_PATH } from './configVariables.js';
+import fs from "fs/promises";
+import { CREDENTIALS_PATH, TOKEN_PATH } from "./configVariables.js";
 
 export default async function saveCredentials(client) {
   const content = await fs.readFile(CREDENTIALS_PATH);
@@ -7,7 +7,7 @@ export default async function saveCredentials(client) {
   const key = keys.installed || keys.web;
 
   const payload = JSON.stringify({
-    type: 'authorized_user',
+    type: "authorized_user",
     client_id: key.client_id,
     client_secret: key.client_secret,
     refresh_token: client.credentials.refresh_token,
@@ -15,4 +15,3 @@ export default async function saveCredentials(client) {
 
   await fs.writeFile(TOKEN_PATH, payload);
 }
-
