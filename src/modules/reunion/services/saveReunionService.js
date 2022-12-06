@@ -12,6 +12,8 @@ export default async function saveReunionService(
 
   const month = getMonthName();
 
+  const todayDayNumber = new Date().getDate();
+
   const cells = await getSpreadsheetValuesProvider(
     client,
     spreadsheetId,
@@ -19,9 +21,32 @@ export default async function saveReunionService(
   );
 
   for (const member of reunion.members) {
-    const memberNameColumn = cells[1].indexOf(member.name);
-    const todayDayNumber = new Date().getDate();
+    const columnIndex = cells[1].indexOf(member.name);
+
+    const lineIndex = cells.findIndex(
+      (line_) => line_[0] === String(todayDayNumber)
+    );
+
+    if (columnIndex !== -1 && lineIndex !== -1) {
+      if (
+        cells[lineIndex][columnIndex] === "" ||
+        cells[lineIndex][columnIndex] === undefined
+      ) {
+        cells[lineIndex][columnIndex] = `${reunion.description}`;
+      } else {
+        cells[lineIndex][columnIndex] += ` + ${reunion.description}`;
+      }
+      cells[lineIndex][columnIndex - 1] = `=${
+        cells[lineIndex][columnIndex - 1]
+      } + ${member.totalMinutes}`;
+    }
   }
 
-  console.log(reunion);
+  await updateSpreadsheetValuesProvider(
+    client,
+    spreadsheetId,
+    month,
+    "USER_ENTERED",
+    cells
+  );
 }

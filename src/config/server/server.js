@@ -7,20 +7,19 @@ const app = express();
 
 app.use(express.json());
 
-app.use(async (error, request, response, next) => {
+app.post("/", saveReunionController);
+
+app.use((error, request, response, next) => {
   if (error instanceof AppError) {
     return response.status(error.statusCode).json({
       message: error.message,
       module: error.module,
     });
   }
-
   return response.status(500).json({
     message: "internal server error",
     module: "default",
   });
 });
-
-app.post("/", saveReunionController);
 
 export default app;

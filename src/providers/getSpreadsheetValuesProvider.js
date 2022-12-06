@@ -21,11 +21,6 @@ export default async function getSpreadsheetValuesProvider(
 
     return response.data.values;
   } catch (error) {
-    console.log("AppError");
-    throw new AppError(
-      "Error wile reading spreadsheet content",
-      400,
-      "getSpreadsheetValuesProvider"
-    );
+    throw new AppError(error.message, 400, "getSpreadsheetValuesProvider");
   }
 }

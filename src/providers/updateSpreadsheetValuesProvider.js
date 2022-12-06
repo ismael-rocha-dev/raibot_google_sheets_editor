@@ -1,4 +1,5 @@
-import { google } from 'googleapis';
+import { google } from "googleapis";
+import AppError from "../config/server/errors/AppError.js";
 
 /**
  * Updates values in a Spreadsheet.
@@ -9,23 +10,27 @@ import { google } from 'googleapis';
  * @param {(string[])[]} values A 2d array of values to update.
  * @return {obj} spreadsheet information
  */
-export default async function updateSpreadsheetValuesProvider({
+export default async function updateSpreadsheetValuesProvider(
   client,
   spreadsheetId,
   range,
   valueInputOption,
-  values,
-}) {
-  const googleSheetsService = google.sheets({ version: 'v4', auth: client });
+  values
+) {
+  try {
+    const googleSheetsService = google.sheets({ version: "v4", auth: client });
 
-  const resource = { values };
+    const resource = { values };
 
-  const response = await googleSheetsService.spreadsheets.values.update({
-    spreadsheetId,
-    range,
-    valueInputOption,
-    resource,
-  });
+    const response = await googleSheetsService.spreadsheets.values.update({
+      spreadsheetId,
+      range,
+      valueInputOption,
+      resource,
+    });
 
-  return response;
+    return response;
+  } catch (error) {
+    throw new AppError(error.message, 400, "updateSpreadsheetValuesProvider");
+  }
 }
