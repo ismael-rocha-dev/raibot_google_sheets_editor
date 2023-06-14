@@ -20,3 +20,29 @@ As instruções detalhadas de como fazer isso podem ser encontradas [AQUI](https
 ```
 PORT=3000
 ```
+
+## ENDPOINTS
+
+`POST:   /`
+
+Example:
+
+```json
+{
+  "spreadsheetId": "16bR14IO1EaFpotQU0WpajA5iVPTZJlaymIuLubYbF_M",
+  "reunion": {
+    "totalMinutes": 10,
+    "description": "Reunião da coordenação",
+    "members": [
+      {
+        "name": "Nome 1",
+        "totalMinutes": 8
+      },
+      {
+        "name": "Nome 2",
+        "totalMinutes": 8
+      }
+    ]
+  }
+}
+```
