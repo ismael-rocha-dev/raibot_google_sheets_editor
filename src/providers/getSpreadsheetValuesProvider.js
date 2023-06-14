@@ -4,7 +4,7 @@ import AppError from "../config/server/errors/AppError.js";
  * Batch gets cell values from a Spreadsheet.
  * @param {string} spreadsheetId The spreadsheet ID.
  * @param {string} _ranges The mock sheet range.
- * @return {any[][] | null | undefined} spreadsheet information
+ * @return {Promise<any[][] | null | undefined>} spreadsheet information
  */
 export default async function getSpreadsheetValuesProvider(
   client,
